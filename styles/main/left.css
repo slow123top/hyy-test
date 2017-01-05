@@ -1,0 +1,43 @@
+#left {
+  margin-right: 3em;
+  float: left;
+  width: 45%;
+  height: 100%;
+  border: 2px dashed orange;
+  color: yellow; }
+  #left ul {
+    list-style: none; }
+  #left div:first-child {
+    border-bottom: 1px solid orange;
+    height: 65%; }
+  #left div:nth-child(2) {
+    height: 35%;
+    font-size: 1.4em;
+    padding: 0 3em; }
+    #left div:nth-child(2) input[type="text"] {
+      width: 150px;
+      color: white;
+      background-color: transparent;
+      outline: none;
+      border: none;
+      border-bottom: 1px solid yellow; }
+    #left div:nth-child(2) p {
+      margin: 0; }
+    #left div:nth-child(2) div {
+      margin-top: 2em; }
+    #left div:nth-child(2) button {
+      cursor: pointer;
+      width: 4em;
+      border: 2px solid lightsteelblue;
+      outline: none;
+      border-radius: 40px;
+      color: lightsteelblue;
+      height: 2em;
+      font-size: 0.8em;
+      background-color: transparent;
+      float: right;
+      margin-right: 1em; }
+      #left div:nth-child(2) button:active {
+        box-shadow: 0 0 10px 5px inset; }
+
+/*# sourceMappingURL=left.css.map */

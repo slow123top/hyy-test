@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/index/index.css">
+    <!--<script src="js/jquery-3.1.1.min.js"></script>-->
+    <title>主页面</title>
+</head>
+<body>
+<header>
+    <h2>我的模型</h2>
+    <!--建立模态登陆框-->
+    <div id="user-information">
+        欢迎<span></span>用户
+        <a href="#">注销</a>
+    </div>
+    <div id="login-register">
+        <button>
+            登录
+        </button>
+        <!--建立模态注册框-->
+        <button>
+            注册
+        </button>
+    </div>
+
+    <hr/>
+    <hr/>
+</header>
+<nav>
+    <ul>
+        <li>创建新模型</li>
+        <li>编辑模型</li>
+        <li>详细报告</li>
+        <li>选股</li>
+        <li>删除</li>
+    </ul>
+</nav>
+<div>
+    <div id="login" class="login-register">
+        <form>
+            <div>
+                <div class="username"><label for="">用户名:</label></div>
+                <input type="text"/>
+            </div>
+            <!--密码-->
+            <div>
+                <div class="password"><label for="">密码:</label></div>
+                <input type="password"/>
+            </div>
+            <div>
+                <input type="submit" value="登录">
+            </div>
+        </form>
+        <!--用户名-->
+
+    </div>
+    <div id="register" class="login-register">
+        <form>
+            <div>
+                <div class="username"><label for="">用户名:</label></div>
+                <input type="text" autofocus/>
+            </div>
+            <div>
+                <!--密码-->
+                <div class="password"><label for="">密码:</label></div>
+                <input type="password"/>
+            </div>
+            <div>
+                <!--邮箱-->
+                <div class="email"><label for="">邮箱:</label></div>
+                <input type="text"/>
+            </div>
+            <div>
+                <input type="submit" value="注册">
+            </div>
+        </form>
+    </div>
+</div>
+<footer></footer>
+<script src="js/require.js" data-main="script/index/index.js"></script>
+</body>
+</html>

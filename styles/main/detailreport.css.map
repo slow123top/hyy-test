@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,cAAe;EACb,KAAK,EAAE,GAAG;EACV,MAAM,EAAE,IAAI;EACZ,MAAM,EAAE,iBAAiB",
+"sources": ["detailreport.scss"],
+"names": [],
+"file": "detailreport.css"
+}

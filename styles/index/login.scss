@@ -1,0 +1,70 @@
+body {
+  & > div {
+    display: none;
+    width: 60em;
+    height: 20em;
+    //border: 1px solid white;
+    margin: auto;
+    margin-top: 5em;
+    color: #FFFF00;
+    font-size: 1.2em;
+    p {
+      margin: 0 auto;
+      display: inline-block;
+      font-size: .8em;
+    }
+    .login-register {
+
+      margin: 0 auto;
+    }
+    .username, .password, .email {
+      width: 10em;
+      margin-left: 10em;
+      text-align: right;
+      display: inline-block;
+    }
+    input[type='text'], input[type='password'] {
+
+      width: 16em;
+      height: 2em;
+      background-color: rgba(0, 0, 0, 0.5);
+      outline: none;
+      border: .1em solid #333333;
+      border-radius: 2px;
+      color: white;
+      font-size: 1em;
+      transition: 500ms;
+      &:hover {
+        border: .1em solid #fcf8e3;
+      }
+      &:focus {
+        border: .1em solid #23abf0;
+      }
+    }
+    input[type='submit'] {
+      outline: none;
+      cursor: pointer;
+      border: .1em solid #0a6999;
+      border-radius: 2px;
+      color: white;
+      background-color: #0a6999;
+      font-size: 1em;
+      width: 16em;
+      height: 2em;
+      margin-left: 20.5em;
+      transition: 500ms;
+      &:hover {
+        background-color: #0f9ae0;
+        border: .1em solid #0f9ae0;
+
+      }
+      //&:active{
+      //  box-shadow: 0 0 5px 5px #0a6999 inset;
+      //}
+    }
+    form > div {
+      margin-top: 1em;
+    }
+
+  }
+}

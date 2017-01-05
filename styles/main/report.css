@@ -1,0 +1,11 @@
+#detail-report, #report {
+  display: none;
+  padding: 4em;
+  width: 80%;
+  height: 60%; }
+  #detail-report > div, #report > div {
+    width: 100%;
+    height: 100%;
+    border: 2px dashed orange; }
+
+/*# sourceMappingURL=report.css.map */

@@ -1,0 +1,39 @@
+$bg: url("../../img/modelBg.jpg");
+@mixin font-border($padding,$color,$fontSize) {
+  border: 1px solid $color;
+  padding: $padding;
+  color: $color;
+  font-size: $fontSize;
+  transition: 500ms;
+  &:hover {
+    background-color: rgba(255,165,0,0.6);
+    //border: 2px solid orange;
+    //box-shadow: 0px 0px 5px 5px;
+  }
+}
+
+@mixin inputStyle() {
+  width: 3em;
+  color: white;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid yellow;
+  text-align: center;
+  margin-right: .5em;
+  font-size: 1em;
+}
+
+@keyframes liHover {
+  from {
+    -webkit-box-shadow: 0 0 25px #333;
+  }
+  50% {
+    //background-color: #91bd09;
+    -webkit-box-shadow: 0 0 50px #91bd09;
+  }
+  to {
+    //background-color: #749a02;
+    -webkit-box-shadow: 0 0 25px #333;
+  }
+}

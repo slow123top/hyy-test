@@ -1,0 +1,95 @@
+#detail-report, #edit-model {
+  display: none;
+  width: 90%;
+  height: 80%;
+  border: 2px dashed orange;
+  font-size: 1.2em; }
+  #detail-report div#detail-report-month, #edit-model div#detail-report-month {
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 80%;
+    height: 60%;
+    margin: 1em auto; }
+    #detail-report div#detail-report-month div:nth-of-type(1), #edit-model div#detail-report-month div:nth-of-type(1) {
+      width: 100%; }
+      #detail-report div#detail-report-month div:nth-of-type(1) table, #edit-model div#detail-report-month div:nth-of-type(1) table {
+        text-align: center;
+        border: none;
+        width: 100%; }
+        #detail-report div#detail-report-month div:nth-of-type(1) table td, #edit-model div#detail-report-month div:nth-of-type(1) table td {
+          font-weight: bold;
+          border-bottom: 1px solid white; }
+        #detail-report div#detail-report-month div:nth-of-type(1) table td:nth-of-type(1), #edit-model div#detail-report-month div:nth-of-type(1) table td:nth-of-type(1) {
+          width: 7em; }
+        #detail-report div#detail-report-month div:nth-of-type(1) table td:nth-of-type(n+2), #edit-model div#detail-report-month div:nth-of-type(1) table td:nth-of-type(n+2) {
+          width: 5em; }
+        #detail-report div#detail-report-month div:nth-of-type(1) table td:last-child, #edit-model div#detail-report-month div:nth-of-type(1) table td:last-child {
+          width: 7em; }
+    #detail-report div#detail-report-month div:nth-of-type(2), #edit-model div#detail-report-month div:nth-of-type(2) {
+      overflow: auto;
+      width: 100%;
+      height: 90%; }
+      #detail-report div#detail-report-month div:nth-of-type(2) table, #edit-model div#detail-report-month div:nth-of-type(2) table {
+        text-align: center;
+        border: none;
+        width: 100%;
+        margin: 0 auto; }
+        #detail-report div#detail-report-month div:nth-of-type(2) table tr, #edit-model div#detail-report-month div:nth-of-type(2) table tr {
+          border: none;
+          height: 2em; }
+          #detail-report div#detail-report-month div:nth-of-type(2) table tr td, #edit-model div#detail-report-month div:nth-of-type(2) table tr td {
+            border-top: 1px solid white;
+            border-right: 1px solid white; }
+          #detail-report div#detail-report-month div:nth-of-type(2) table tr td:nth-of-type(1), #edit-model div#detail-report-month div:nth-of-type(2) table tr td:nth-of-type(1) {
+            width: 7em; }
+          #detail-report div#detail-report-month div:nth-of-type(2) table tr td:nth-of-type(n+2), #edit-model div#detail-report-month div:nth-of-type(2) table tr td:nth-of-type(n+2) {
+            width: 5em; }
+          #detail-report div#detail-report-month div:nth-of-type(2) table tr td:last-child, #edit-model div#detail-report-month div:nth-of-type(2) table tr td:last-child {
+            width: 7em; }
+  #detail-report div#detail-report-stock, #edit-model div#detail-report-stock {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 0;
+    width: 95%;
+    height: 30%;
+    margin: auto;
+    margin-top: 2em; }
+    #detail-report div#detail-report-stock div:nth-of-type(1), #edit-model div#detail-report-stock div:nth-of-type(1) {
+      width: 100%; }
+      #detail-report div#detail-report-stock div:nth-of-type(1) table, #edit-model div#detail-report-stock div:nth-of-type(1) table {
+        border: none;
+        width: 100%; }
+        #detail-report div#detail-report-stock div:nth-of-type(1) table td, #edit-model div#detail-report-stock div:nth-of-type(1) table td {
+          font-weight: bold;
+          border-bottom: 1px solid white; }
+        #detail-report div#detail-report-stock div:nth-of-type(1) table td:first-child, #edit-model div#detail-report-stock div:nth-of-type(1) table td:first-child {
+          padding: 0 0 0 2em; }
+        #detail-report div#detail-report-stock div:nth-of-type(1) table td:nth-of-type(2), #edit-model div#detail-report-stock div:nth-of-type(1) table td:nth-of-type(2) {
+          padding: 0 0 0 33em; }
+        #detail-report div#detail-report-stock div:nth-of-type(1) table td:last-child, #edit-model div#detail-report-stock div:nth-of-type(1) table td:last-child {
+          text-align: right; }
+    #detail-report div#detail-report-stock div:nth-of-type(2), #edit-model div#detail-report-stock div:nth-of-type(2) {
+      overflow-y: auto;
+      overflow-x: hidden;
+      width: 100%;
+      height: 90%; }
+      #detail-report div#detail-report-stock div:nth-of-type(2) table, #edit-model div#detail-report-stock div:nth-of-type(2) table {
+        text-align: center;
+        border: none;
+        width: 100%;
+        margin: 0 auto;
+        table-layout: fixed; }
+        #detail-report div#detail-report-stock div:nth-of-type(2) table tr, #edit-model div#detail-report-stock div:nth-of-type(2) table tr {
+          border: none;
+          width: 100%; }
+          #detail-report div#detail-report-stock div:nth-of-type(2) table tr td, #edit-model div#detail-report-stock div:nth-of-type(2) table tr td {
+            padding: 0;
+            border-top: 1px solid white;
+            border-right: 1px solid white;
+            word-wrap: break-word;
+            -ms-word-wrap: break-word;
+            -webkit-word-wrap: break-word; }
+          #detail-report div#detail-report-stock div:nth-of-type(2) table tr td:first-child, #edit-model div#detail-report-stock div:nth-of-type(2) table tr td:first-child {
+            width: 10em; }
+          #detail-report div#detail-report-stock div:nth-of-type(2) table tr td:last-child, #edit-model div#detail-report-stock div:nth-of-type(2) table tr td:last-child {
+            width: 8em; }
+
+/*# sourceMappingURL=edit-report.css.map */

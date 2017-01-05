@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,uBAAe;EACb,OAAO,EAAE,IAAI;EACb,OAAO,EAAE,GAAG;EACZ,KAAK,EAAE,GAAG;EACV,MAAM,EAAE,GAAG;EAEX,mCAAQ;IACN,KAAK,EAAE,IAAI;IACX,MAAM,EAAE,IAAI;IACZ,MAAM,EAAE,iBAAiB",
+"sources": ["detailreport.scss"],
+"names": [],
+"file": "report.css"
+}

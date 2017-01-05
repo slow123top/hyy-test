@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 80em;
+  height: 67.5em; }
+  body > div {
+    margin: 0;
+    padding: 0 1em 0 1em;
+    background-image: url("../img/modelBg.jpg");
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%; }
+
+header h2 {
+  display: inline-block;
+  border: 2px solid red;
+  border-radius: 40px 10px;
+  padding: 0.5em;
+  color: red;
+  font-size: 1.5em;
+  margin: 1em 1.8em; }
+header span {
+  color: lightsteelblue;
+  font-size: 1.4em; }
+header hr {
+  border: 1px solid yellow;
+  margin-top: -3px; }
+
+#user-information {
+  display: none;
+  float: right;
+  margin-right: 5em;
+  color: yellow;
+  line-height: 4em;
+  font-size: 1.5em; }
+  #user-information a {
+    color: white;
+    margin-left: 5em;
+    text-decoration: none; }
+
+/*# sourceMappingURL=header.css.map */

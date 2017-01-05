@@ -1,0 +1,18 @@
+nav ul {
+  list-style: none; }
+  nav ul li {
+    display: inline-block;
+    width: 8em;
+    text-align: center;
+    cursor: pointer;
+    margin-right: .5em; }
+  nav ul li:nth-child(6), nav ul li:last-child {
+    display: none; }
+  nav ul li:nth-child(n+2) {
+    border: 2px solid lightsteelblue;
+    border-radius: 40px 10px;
+    padding: 0.5em;
+    color: lightsteelblue;
+    font-size: 1.5em; }
+
+/*# sourceMappingURL=nav.css.map */

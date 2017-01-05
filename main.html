@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>我的模型</title>
+    <link rel="stylesheet" href="styles/main/modelstyle.css"/>
+</head>
+<body>
+<div>
+    <header>
+        <h2>我的模型</h2>
+        <!--<a href="#">回到首页</a>-->
+        <div id="user-information">
+            欢迎<span></span>用户
+            <a href="#">注销</a>
+        </div>
+        <hr/>
+        <hr/>
+    </header>
+    <nav>
+        <ul>
+            <li>编辑</li>
+            <li>报告</li>
+            <li>详细报告</li>
+            <li>选股</li>
+            <li>保存</li>
+            <li>重置</li>
+            <!--登录之后的页面显示-->
+            <li>创建新模型</li>
+            <li>编辑模型</li>
+            <li>详细报告</li>
+            <li>选股</li>
+            <li>删除</li>
+        </ul>
+    </nav>
+    <div id="model">
+        <div id="left">
+            <div>
+                <span></span>
+                <div id="slider"></div>
+                <span></span>
+            </div>
+            <div>
+                <ul>
+
+                </ul>
+            </div>
+            <div>
+                <form>
+                    <div class="f-five">
+                        <div><label>持有期:</label></div>
+                        <div>
+                            <input type="text" min="1" max="60"/>日
+                        </div>
+                    </div>
+                    <div class="f-five">
+                        <div><label>跌幅达到百分之M1止损:</label></div>
+                        <div>
+                            <input type="text"/>
+                        </div>
+                    </div>
+                    <div class="f-five">
+                        <div>
+                            <label>
+                                涨幅达到百分之M2止盈:
+                            </label></div>
+                        <div>
+                            <input type="text"/>
+                        </div>
+                    </div>
+                    <div class="f-five">
+                        <div><label>模型名称:</label></div>
+                        <div>
+                            <input type="text"/></div>
+                    </div>
+                    <div class="f-five">
+                        <div><label>回测时间:</label></div>
+                        <div>
+                            <input name="back-time" value="1" type="radio" checked>1年
+                            <input name="back-time" value="3" type="radio">3年
+                            <input name="back-time" value="5" type="radio">5年
+                        </div>
+                    </div>
+                    <input type="reset">
+                </form>
+                <button>运行</button>
+            </div>
+        </div>
+        <div id="right">
+            <ul id="index">
+                <li class="A0001"><span>N日涨跌幅在M1到M2之间</span>
+                    <span>
+                        N<input class="date" type='text' min="1" max="30" step="1" value="5">
+                    M1<input class="percentage" type='text' min="-100" max="1000" step="1" value="-2">%
+                    M2<input class="percentage" type='text' min="-100" max="1000" step="1" value="2">%
+                        </span>
+                    <span>
+                    <img src="img/delete.png" alt=""/>
+                    </span>
+                </li>
+                <li class="A0002"><span>N日平均换手率在M1-M2之间</span>
+                    <span>
+                        N<input class="date" type='text' min="1" max="30" step="1" value="5">
+                    M1<input class="percentage" type='text' min="0" max="200" step="1" value="0">%
+                    M2<input class="percentage" type='text' min="0" max="200" step="1" value="10">%
+                    </span>
+                    <span>
+                    <img src="img/delete.png" alt=""/>
+                    </span>
+                </li>
+                <li class="A0004"><span>N1日均线上穿N2日均线</span>
+                    <span>
+                         N1<input class="date" type='text' min="1" max="60" step="1" value="10">
+                    N2<input class="date" type='text' min="1" max="60" step="1" value="30">
+                    </span>
+                    <span>
+                    <img src="img/delete.png" alt=""/>
+                    </span>
+
+                </li>
+                <li class="A0005"><span>N日内每日涨跌幅的绝对值的平均值在M1-M2内</span>
+                    <span>
+                        N<input class="date" type='text' min="1" max="30" step="1" value="5">
+                    M1<input class="percentage" type='text' min="0" max="1000" step="1" value="0">%
+                    M2<input class="percentage" type='text' min="0" max="1000" step="1" value="2">%
+                   </span>
+                    <span>
+                    <img src="img/delete.png" alt=""/>
+                    </span>
+                </li>
+                <li class="A0006"><span>连续下跌N1天后又连续上涨N2天</span>
+                    <span>
+                        N1<input class="date" type='text' min="1" max="29" step="1" value="2">
+                    N2<input class="date" type='text' min="1" max="29" step="1" value="3">
+                   </span>
+                    <span>
+                    <img src="img/delete.png" alt=""/>
+                    </span>
+                </li>
+                <li class="A0007"><span>macd金/死叉</span>
+                    <span>
+                        <input type='radio' name="macd" value="1" checked>金叉
+                        <input type='radio' name="macd" value="0">死叉
+                    </span>
+                    <span>
+                    <img src="img/delete.png" alt=""/>
+                    </span>
+                </li>
+                <li class="A0008"><span>总市值在M1-M2内</span>
+                    <span>
+                        M1<input class="percentage" type='text' min="1" max="10" step="0.01" value="2000"/>
+                        <select class="unit">
+                            <option value="1000000">百万</option>
+                            <option value="10000000">千万</option>
+                            <option value="100000000">亿</option>
+                            <option value="1000000000">十亿</option>
+                            <option value="10000000000">百亿</option>
+                            <option value="100000000000">千亿</option>
+                        </select>
+                        M2<input class="percentage" type='text' min="1" max="10" step="0.01" value="3000"/>
+                        <select class="unit">
+                            <option value="1000000">百万</option>
+                            <option value="10000000">千万</option>
+                            <option value="100000000">亿</option>
+                            <option value="1000000000">十亿</option>
+                            <option value="10000000000">百亿</option>
+                            <option value="100000000000">千亿</option>
+                        </select>
+                    </span>
+                    <span>
+                    <img src="img/delete.png" alt=""/>
+                    </span>
+
+                </li>
+                <li class="A0009"><span>流通市值介于M1-M2内</span>
+                    <span>
+                        M1<input type='text' min="1" max="10" step="0.01" value="2000">
+                        <select class="unit">
+                            <option value="1000000">百万</option>
+                            <option value="10000000">千万</option>
+                            <option value="100000000">亿</option>
+                            <option value="1000000000">十亿</option>
+                            <option value="10000000000">百亿</option>
+                            <option value="100000000000">千亿</option>
+                        </select>
+                    M2<input type='text' min="1" max="10" step="0.01" value="3000">
+                        <select class="unit">
+                            <option value="1000000">百万</option>
+                            <option value="10000000">千万</option>
+                            <option value="100000000">亿</option>
+                            <option value="1000000000">十亿</option>
+                            <option value="10000000000">百亿</option>
+                            <option value="100000000000">千亿</option>
+                        </select>
+                   </span>
+                    <span>
+                    <img src="img/delete.png" alt=""/>
+                    </span>
+
+                </li>
+                <li class="A0010"><span>倒数第M个交易日的成交量是过去N天内的最低量</span>
+                    <span>
+                        N<input class="date" type='text' min="2" max="30" step="1" value="10"/>
+                    M<input class="date" type='text' min="1" max="30" step="1" value="1"/>
+                    </span>
+                    <span>
+                    <img src="img/delete.png" alt=""/>
+                    </span>
+                </li>
+                <li class="A0011"><span>倒数第M个交易日的成交量是过去N天内的最高量</span>
+                    <span>
+                        N<input class="date" type='text' min="2" max="30" step="1" value="10"/>
+                    M<input class="date" type='text' min="1" max="30" step="1" value="1"/>
+                    </span>
+                    <span>
+                    <img src="img/delete.png" alt=""/>
+                    </span>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+    <div id="report">
+        <div id="report-echarts"></div>
+        <div id="report-table">
+            <table class="report-table">
+                <thead>
+                <tr>
+                    <th>盈利率</th>
+                    <th>最大回撤</th>
+                    <th>月平均收益</th>
+                    <th>止盈总数</th>
+                    <th>止损总数</th>
+                    <th>止盈占比</th>
+                    <th>止损占比</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <canvas id="progress">
+
+        </canvas>
+    </div>
+    <div id="detail-report">
+        <div id="detail-report-month">
+            <div>
+                <table>
+                    <tr>
+                        <td>年份_月份</td>
+                        <td><span>1</span>月</td>
+                        <td><span>2</span>月</td>
+                        <td><span>3</span>月</td>
+                        <td><span>4</span>月</td>
+                        <td><span>5</span>月</td>
+                        <td><span>6</span>月</td>
+                        <td><span>7</span>月</td>
+                        <td><span>8</span>月</td>
+                        <td><span>9</span>月</td>
+                        <td><span>10</span>月</td>
+                        <td><span>11</span>月</td>
+                        <td><span>12</span>月</td>
+                        <td>年度盈利率</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <table class="report-table">
+                </table>
+            </div>
+
+        </div>
+
+        <div id="detail-report-stock">
+            <div>
+                <table>
+
+                    <tr>
+                        <td>买入日期</td>
+                        <td>详细选股记录</td>
+                        <td>持有期内总盈利</td>
+                    </tr>
+                    <!--</thead>-->
+                </table>
+            </div>
+            <div>
+                <table class="report-table">
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+    <div id="choose-stock">
+    </div>
+    <div id="edit-model">
+        <div id="my-model">
+            <ul>
+                <!--<li>模型1号</li>-->
+                <!--<li>模型2号</li>-->
+                <!--<li>模型3号</li>-->
+                <!--<li>模型4号</li>-->
+            </ul>
+        </div>
+        <div id="my-report">
+            <p>回测结果</p>
+            <!--返回数据不太多-->
+            <div id="not-too-much" class="test-result">
+                <ul>
+                    <li><p>模型名称:</p><span></span></li>
+                    <li><p>盈利率:</p><span></span></li>
+                    <li><p>最大回撤:</p><span></span></li>
+                    <li><p>月平均收益:</p><span></span></li>
+                    <li><p>止盈总数:</p><span></span></li>
+                    <li><p>止损总数:</p><span></span></li>
+                    <li><p>止盈占比:</p><span></span></li>
+                    <li><p>止损占比:</p><span></span></li>
+                </ul>
+                <!--报告模型折线图-->
+                <div id="my-report-chart" class="chart"></div>
+            </div>
+            <!--返回数据太多   还有返回数据是0的状况-->
+            <div id="too-much" class="test-result">
+                <!--<p>-->
+                <!--在回测期内，共选中 N 个股票。股票数量过大，系统给出摘要信息供您参考：-->
+                <!--所有选中的股票<br>在随后1个交易日的平均涨跌幅为 M1<br>-->
+                <!--在随后5个交易日的平均涨跌幅为 M2<br>-->
+                <!--在随后20个交易日的平均涨跌幅为 M3-->
+                <!--</p>-->
+            </div>
+            <!--详细报告结果-->
+        </div>
+        <div id="my-detail-report">
+            <div>
+                <p>模型名称:</p>
+                <span></span>
+                <p>盈利率:</p>
+                <span></span>
+                <p>最大回撤:</p>
+                <span></span>
+                <p>月平均收益:</p>
+                <span></span>
+                <p>止盈总数:</p>
+                <span></span>
+                <p>止损总数:</p>
+                <span></span>
+                <p>止盈占比:</p>
+                <span></span>
+                <p>止损占比:</p>
+                <span></span>
+            </div>
+            <div id="my-detail-report-chart" class="chart">
+
+            </div>
+            <!--年份月份表格-->
+            <div>
+                <div>
+                    <table>
+                        <tr>
+                            <td>年/月份</td>
+                            <td><span>1</span>月</td>
+                            <td><span>2</span>月</td>
+                            <td><span>3</span>月</td>
+                            <td><span>4</span>月</td>
+                            <td><span>5</span>月</td>
+                            <td><span>6</span>月</td>
+                            <td><span>7</span>月</td>
+                            <td><span>8</span>月</td>
+                            <td><span>9</span>月</td>
+                            <td><span>10</span>月</td>
+                            <td><span>11</span>月</td>
+                            <td><span>12</span>月</td>
+                            <td>年盈利率</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <table class="report-table">
+                    </table>
+                </div>
+
+            </div>
+
+            <!--模型选股记录表格-->
+            <div>
+                <div>
+                    <table>
+
+                        <tr>
+                            <td>买入日期</td>
+                            <td>详细选股记录</td>
+                            <td>持有期内总盈利</td>
+                        </tr>
+                        <!--</thead>-->
+                    </table>
+                </div>
+                <div>
+                    <table class="report-table">
+
+                        <tr>
+                            <td>1</td>
+                            <td>1asdasssssssssssssssssssssssssssssssssssssssssssssssshuyuyang</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <button>导出</button>
+            </div>
+        </div>
+
+        <!--<div id="edit-model-chart">-->
+        <!--</div>-->
+        <!--&lt;!&ndash;模型止盈止损表格&ndash;&gt;-->
+        <!--<div>-->
+        <!--<table class="report-table">-->
+        <!--<thead>-->
+        <!--<tr>-->
+        <!--<th>盈利率</th>-->
+        <!--<th>最大回撤</th>-->
+        <!--<th>月平均收益</th>-->
+        <!--<th>止盈总数</th>-->
+        <!--<th>止损总数</th>-->
+        <!--<th>止盈占比</th>-->
+        <!--<th>止损占比</th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+        <!--</table>-->
+        <!--</div>-->
+
+        <!--模型年份月份表格-->
+
+
+    </div>
+    <footer></footer>
+</div>
+<!--<script src="js/echarts.js"></script>-->
+<script src="js/require.js" data-main="script/main/main.js"></script>
+</body>
+</html>

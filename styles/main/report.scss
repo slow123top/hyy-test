@@ -1,0 +1,39 @@
+@import "detailreport";
+
+#report {
+  @extend #detail-report;
+  //padding:0 8em;
+  #report-echarts {
+    margin: auto;
+    margin-top: 2em;
+    width: 1400px;
+    height: 400px;
+  }
+  #report-table {
+    width: 70%;
+    height: 10%;
+    color: yellow;
+    margin: auto;
+    margin-top: 2em;
+    table {
+      width: 100%;
+      height: 100%;
+      border: 1px solid lightsteelblue;
+      th, tr, td {
+        border: 1px solid lightsteelblue;
+      }
+      td {
+        text-align: center;
+      }
+    }
+  }
+  p{
+    text-align: center;
+    margin: 10em;
+    color: yellow;
+  }
+  #progress{
+    display: none;
+    margin: 0 auto;
+  }
+}

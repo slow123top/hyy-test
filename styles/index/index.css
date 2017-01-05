@@ -1,0 +1,168 @@
+@keyframes liHover {
+  from {
+    -webkit-box-shadow: 0 0 25px #333; }
+  50% {
+    -webkit-box-shadow: 0 0 50px #91bd09; }
+  to {
+    -webkit-box-shadow: 0 0 25px #333; } }
+body > div {
+  display: none;
+  width: 60em;
+  height: 20em;
+  margin: auto;
+  margin-top: 5em;
+  color: #FFFF00;
+  font-size: 1.2em; }
+  body > div p {
+    margin: 0 auto;
+    display: inline-block;
+    font-size: .8em; }
+  body > div .login-register {
+    margin: 0 auto; }
+  body > div .username, body > div .password, body > div .email {
+    width: 10em;
+    margin-left: 10em;
+    text-align: right;
+    display: inline-block; }
+  body > div input[type='text'], body > div input[type='password'] {
+    width: 16em;
+    height: 2em;
+    background-color: rgba(0, 0, 0, 0.5);
+    outline: none;
+    border: .1em solid #333333;
+    border-radius: 2px;
+    color: white;
+    font-size: 1em;
+    transition: 500ms; }
+    body > div input[type='text']:hover, body > div input[type='password']:hover {
+      border: .1em solid #fcf8e3; }
+    body > div input[type='text']:focus, body > div input[type='password']:focus {
+      border: .1em solid #23abf0; }
+  body > div input[type='submit'] {
+    outline: none;
+    cursor: pointer;
+    border: .1em solid #0a6999;
+    border-radius: 2px;
+    color: white;
+    background-color: #0a6999;
+    font-size: 1em;
+    width: 16em;
+    height: 2em;
+    margin-left: 20.5em;
+    transition: 500ms; }
+    body > div input[type='submit']:hover {
+      background-color: #0f9ae0;
+      border: .1em solid #0f9ae0; }
+  body > div form > div {
+    margin-top: 1em; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("../../img/modelBg.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%; }
+
+header h2 {
+  display: inline-block;
+  border: 1px solid red;
+  padding: 0.3em;
+  color: red;
+  font-size: 1.6em;
+  transition: 500ms;
+  padding: 0.4em;
+  margin: 1em 1.8em;
+  cursor: pointer;
+  pointer-events: none; }
+  header h2:hover {
+    background-color: rgba(255, 165, 0, 0.6); }
+header span {
+  color: lightsteelblue;
+  font-size: 1.4em; }
+header hr {
+  border: 1px solid yellow;
+  margin-top: -3px;
+  margin-bottom: .5em; }
+
+nav ul {
+  list-style: none; }
+  nav ul li {
+    margin-top: .4em;
+    display: inline-block;
+    width: 9.5em;
+    text-align: center;
+    cursor: pointer;
+    margin-right: .5em;
+    border: 1px solid lightsteelblue;
+    padding: 0.3em;
+    color: lightsteelblue;
+    font-size: 1.5em;
+    transition: 500ms;
+    pointer-events: none; }
+    nav ul li:hover {
+      background-color: rgba(255, 165, 0, 0.6); }
+
+#user-information {
+  display: none;
+  float: right;
+  margin-right: 5em;
+  color: yellow;
+  line-height: 4em;
+  font-size: 1.5em; }
+  #user-information a {
+    color: white;
+    margin-left: 5em;
+    text-decoration: none; }
+
+#login-register {
+  margin-right: 5em;
+  display: inline-block;
+  line-height: 6em;
+  float: right; }
+  #login-register button {
+    cursor: pointer;
+    color: yellow;
+    outline: none;
+    border: none;
+    font-size: 1.5em;
+    border-radius: 20px;
+    background-color: transparent;
+    line-height: normal;
+    width: 4em;
+    height: 2em;
+    transition: 500ms; }
+    #login-register button:hover {
+      opacity: 0.8;
+      color: yellow;
+      box-shadow: 0 0 10px 5px inset; }
+    #login-register button:active {
+      box-shadow: 0 0 10px 5px; }
+  #login-register .modal-body label {
+    font-size: 1.2em; }
+  #login-register .modal-body label + div {
+    display: inline-block; }
+  #login-register .modal-body input {
+    outline: none;
+    background-color: lightgray;
+    border: none;
+    height: 2em;
+    width: 18em;
+    border-radius: 5px;
+    transition: 500ms; }
+    #login-register .modal-body input:focus {
+      border: 2px solid lightskyblue; }
+  #login-register .modal-body form {
+    padding: 0 0 0 6em; }
+    #login-register .modal-body form > div {
+      height: 3.5em;
+      margin-bottom: 1em; }
+  #login-register .modal-body button:last-child {
+    margin-left: 10em; }
+
+#login-modal-body form > div:nth-of-type(2) {
+  margin-left: 1.1em; }
+
+#register-modal-body div:nth-of-type(n+2) {
+  margin-left: 1.1em; }
+
+/*# sourceMappingURL=index.css.map */
