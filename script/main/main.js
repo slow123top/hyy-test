@@ -9,26 +9,28 @@ require.config({
     //     'amui': ['$']
     // }
 });
-require(["elementCtrl","run","check","model"], function (elementCtrl,run,check,model) {
+require(["elementCtrl","run","check","model","newmodel","editmodel","savemodel","detailreport","deletemodel","jquery"], function (elementCtrl,run,check,model,newModel,editModel,saveModel,detailReport,deleteModel) {
+    //回退
+
+    // elementCtrl.myModel();
+    //加载用户名
+    elementCtrl.receiveUserName();
+    //注销
+    elementCtrl.logout();
     //选择指标
     run.chooseIndex();
 //    运行并生成详细报告
     run.runResult();
 //    重置
-    elementCtrl.resetPage();
+
+    //
+    elementCtrl.indexChange();
     //校验
     check.check();
-    //报告
-    elementCtrl.report();
-    //详细报告
-    elementCtrl.detailReport();
-
-    //保存模型
-    elementCtrl.saveModel();
 //    编辑
     elementCtrl.edit();
 //    创建新模型
-    elementCtrl.newModel();
+    newModel.newModel();
 //用户模型表
     model.userModelList();
 //    每一个模型的报告
@@ -37,4 +39,18 @@ require(["elementCtrl","run","check","model"], function (elementCtrl,run,check,m
     model.detailReport();
 //    导出excel表格
     model.exportExcel();
+//    编辑模型
+    editModel.editModel();
+//    保存模型
+
+    saveModel.saveModel();
+//    详细报告
+    detailReport.detailReport();
+//    删除模型
+    deleteModel.deleteModel();
+    elementCtrl.resetPage();
+//    禁止回退
+    elementCtrl.forbidBack();
+//    换肤
+    elementCtrl.replaceSkin();
 })

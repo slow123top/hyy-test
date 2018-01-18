@@ -4,6 +4,69 @@
  */
 define(function () {
     return {
+        //定义几个全局变量
+        currentModelId: "",
+        currentModelName: "",
+        currentModelInfo: "",
+        currentReportData: "",
+        goBack: "",
+        saveFlag: 0,
+        //详细报告显示指标
+        appendIndexToDetail: function ($div) {
+            $div.find("ul").remove();
+            $div.prepend("<ul>模型指标:</ul>");
+            var $leftIndex = $("#left").children("div").find("ul").find("li");
+            var leftIndexLen = $("#left").children("div").find("ul").find("li").length;
+            var $input = $("#left").children("div").eq(2).find("input[type='text']");
+            var $inputChecked = $("#left").children("div").eq(2).find("input[type='radio']:checked");
+            for (var i = 0; i < leftIndexLen; i++) {
+                var className = $leftIndex.eq(i).attr("class");
+                var $val = $leftIndex.eq(i).find("input");
+                var $select = $leftIndex.eq(i).find("select");
+                switch (className) {
+                    case "A0001":
+                        $div.find("ul").append("<li><span>" + $val.eq(0).val() + "</span>日涨跌幅在<span>" + $val.eq(1).val() + "</span>到<span>" + $val.eq(2).val() + "</span></li>");
+                        break;
+                    case "A0002":
+                        $div.find("ul").append("<li><span>" + $val.eq(0).val() + "</span>日平均换手率在<span>" + $val.eq(1).val() + "</span>-<span>" + $val.eq(2).val() + "</span>之间</li>");
+                        break;
+                    case "A0004":
+                        $div.find("ul").append("<li><span>" + $val.eq(0).val() + "</span>日均线上穿<span>" + $val.eq(1).val() + "</span>日均线</li>");
+                        break;
+                    case "A0005":
+                        $div.find("ul").append("<li><span>" + $val.eq(0).val() + "</span>日内每日涨跌幅的绝对值的平均值在<span>" + $val.eq(1).val() + "</span>-<span>" + $val.eq(2).val() + "</span>内</li>");
+                        break;
+                    case "A0006":
+                        $div.find("ul").append("<li>连续下跌<span>" + $val.eq(0).val() + "</span>天后又连续上涨<span>" + $val.eq(1).val() + "</span>天</li>");
+                        break;
+                    case "A0007":
+                        $div.find("ul").append("<li><span></span>日平均换手率在<span></span><span>-</span>之间</li>");
+                        break;
+                    case "A0008":
+                        var m1 = $val.eq(0).val() * $select.eq(0).val();
+                        var m2 = $val.eq(1).val() * $select.eq(1).val();
+                        $div.find("ul").append("<li>总市值在<span>" + m1 + "</span>-<span>" + m2 + "</span>内</li>");
+                        break;
+                    case "A0009":
+                        var m1 = $val.eq(0).val() * $select.eq(0).val();
+                        var m2 = $val.eq(1).val() * $select.eq(1).val();
+                        $div.find("ul").append("<li>流通市值介于<span>" + m1 + "</span>-<span>" + m2 + "</span>内</li>");
+                        break;
+                    case "A0010":
+                        $div.find("ul").append("<li>倒数第<span>" + $val.eq(1).val() + "</span>个交易日的成交量是过去<span>" + $val.eq(0).val() + "</span>天内的最低量</li>");
+                        break;
+                    case "A0011":
+                        $div.find("ul").append("<li>倒数第<span>" + $val.eq(1).val() + "</span>个交易日的成交量是过去<span>" + $val.eq(0).val() + "</span>天内的最高量</li>");
+                        break;
+                }
+
+            }
+            //    加入持有期 跌幅达到百分之M1止损 涨幅达到百分之M2止盈 回测时间 模型名称
+            $div.find("ul").append("<li>持有期是<span>" + $input.eq(0).val() + "</span>日</li>");
+            $div.find("ul").append("<li>跌幅达到<span>" + $input.eq(1).val() + "</span>%止损</li>");
+            $div.find("ul").append("<li>涨幅达到<span>" + $input.eq(2).val() + "</span>%止盈</li>");
+            $div.find("ul").append("<li>回测时间是<span>" + $inputChecked.val() + "</span>年</li>");
+        },
         //输入校验的提示非弹框
         warn: function ($this, warnInfo) {
             var $parent = $this.parent().parent().parent();
@@ -12,7 +75,7 @@ define(function () {
         //控制按钮样式变化的函数
         buttonCss: function ($li, color, pointerEvents) {
             $li.css({
-                "border": "2px solid " + color,
+                "border": "1px solid " + color,
                 "color": color,
                 "pointer-events": pointerEvents
             })
@@ -40,6 +103,13 @@ define(function () {
                         //给指标填空
                         var selectVal = Number($input.eq(j).next().val());
                         modelInfo += Number($input.eq(j).val()) * selectVal + "_";
+                    }
+                } else if (className === "A0001" || className === "A0002" || className === "A0005") {
+                    var $input = $li.eq(i).find("input");
+                    modelInfo += $input.eq(0).val() + "_";
+                    for (var j = 1; j < $input.length; j++) {
+                        //给指标填空
+                        modelInfo += Number($input.eq(j).val()) / 100 + "_";
                     }
                 } else {
                     var $input = $li.eq(i).find("input");
@@ -74,10 +144,10 @@ define(function () {
         //生成折线图
         fundLine: function (myChart, dateTime, ModelProfit, HS300Profit) {
             for (var i = 0; i < ModelProfit.length; i++) {
-                ModelProfit[i] = ModelProfit[i].toFixed(2);
+                ModelProfit[i] = Number(ModelProfit[i]).toFixed(2);
             }
             for (var j = 0; j < HS300Profit.length; j++) {
-                HS300Profit[j] = HS300Profit[j].toFixed(2);
+                HS300Profit[j] = Number(HS300Profit[j]).toFixed(2);
             }
             var option = {
                 //折线图标题
@@ -85,7 +155,8 @@ define(function () {
                     text: '模型资金净值曲线',
                     textStyle: {
                         color: "#FFFFFF"
-                    }
+                    },
+                    left:"10%"
                 },
                 // backgroundColor: "rgba(255,255,255,0.7)",
                 tooltip: {
@@ -99,6 +170,7 @@ define(function () {
                         color: "#FFFFFF",
                         fontSize: 16
                     },
+                    top:"10%"
 
                 },
                 calculable: true,
@@ -140,17 +212,9 @@ define(function () {
                         }
                     }
                 ],
-                // dataZoom: [
-                //     {
-                //         type: "slider",
-                //         backgroundColor: "rgba(255,255,255,0.2)",
-                //         // filterColor:"black"
-                //     },
-                //
-                // ],
                 dataZoom: [{
-                    start: 30,
-                    end: 80
+                    start: 0,
+                    end: 100
                 },
                     {
                         type: 'inside',
@@ -158,13 +222,6 @@ define(function () {
                 ],
                 series: [
                     {
-                        // lineStyle: {
-                        //     normal: {
-                        //         color: "red",
-                        //         type: "solid"
-                        //     }
-                        //
-                        // },
                         symbol: "circle",
                         name: '模型资金净值',
                         type: 'line',
@@ -196,14 +253,25 @@ define(function () {
 
         },
         //生成报告
-        reportTable: function ($span, infoNotTooMuch) {
-            $span.eq(0).text((infoNotTooMuch[0] * 100).toFixed(2) + "%");
-            $span.eq(1).text((infoNotTooMuch[1] * 100).toFixed(2) + "%");
-            $span.eq(2).text((infoNotTooMuch[2] * 100).toFixed(2) + "%");
-            $span.eq(3).text(infoNotTooMuch[3]);
-            $span.eq(4).text(infoNotTooMuch[4]);
-            $span.eq(5).text((infoNotTooMuch[5] * 100).toFixed(2) + "%");
-            $span.eq(6).text((infoNotTooMuch[6] * 100).toFixed(2) + "%");
+        reportTable: function ($span, infoNotTooMuch, infoTooMuch) {
+            if (infoNotTooMuch.length === 0) {
+                $span.eq(1).text("0.00%");
+                $span.eq(2).text("0.00%");
+                $span.eq(4).text("0.00%");
+                $span.eq(5).text(0);
+                $span.eq(6).text(0);
+                $span.eq(7).text("0.00%");
+                $span.eq(8).text("0.00%");
+            } else {
+                $span.eq(1).text((Number(infoNotTooMuch[0]) * 100).toFixed(2) + "%");
+                $span.eq(2).text((Number(infoNotTooMuch[1]) * 100).toFixed(2) + "%");
+                $span.eq(4).text((Number(infoNotTooMuch[2]) * 100).toFixed(2) + "%");
+                $span.eq(5).text(Number(infoNotTooMuch[3]));
+                $span.eq(6).text(Number(infoNotTooMuch[4]));
+                $span.eq(7).text((Number(infoNotTooMuch[5]) * 100).toFixed(2) + "%");
+                $span.eq(8).text((Number(infoNotTooMuch[6]) * 100).toFixed(2) + "%");
+            }
+            $span.eq(3).text(Number(infoTooMuch[0]));
         },
         //    生成详细报告年份月份表格
         detailReportYearMonth: function ($table, dataYear, dataMonth) {
@@ -248,7 +316,18 @@ define(function () {
         detailReportStock: function ($table, dataTime, stocks, ModelProfit) {
             $table.find("*").remove();
             for (var i = 0; i < dataTime.length; i++) {
-                $table.append("<tr><td>" + dataTime[i] + "</td><td>" + stocks[i] + "</td><td>" + ((ModelProfit[i] * 100).toFixed(2) + "%") + "</td></tr>");
+                //先把时间和盈利率加上
+                $table.append("<tr><td>" + dataTime[i] + "</td><td></td><td>" + ((ModelProfit[i] * 100).toFixed(2) + "%") + "</td></tr>");
+                var tdVal = "";
+                for (var j = 0; j < stocks[i].length; j++) {
+                    //    再把选股记录逐条加上
+                    tdVal = $table.find("tr").last().find("td").eq(1).text();
+                    // if ((j + 1) === stocks[i].length) {
+                    //     $table.find("tr").last().find("td").eq(1).text(tdVal + stocks[i][j]);
+                    // } else {
+                    $table.find("tr").last().find("td").eq(1).text(tdVal + stocks[i][j] + "，");
+                    // }
+                }
             }
         }
 

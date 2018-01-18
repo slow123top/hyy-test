@@ -5,17 +5,12 @@ require.config({
     paths: {
         "jquery": "../../js/jquery",
         "jqueryUi": "../../js/jquery-ui.min",
-        "echarts": "../../js/echarts"
+        "echarts": "../../js/echarts",
+        "jquery.table2excel.min": "../../js/jquery.table2excel.min"
 
     }
 })
-define(["jquery","util", "echarts", "jqueryUi"], function ($,util, echarts) {
-    var currentModelId = "";
-    var currentModelName = "";
-    var currentModelInfo = "";
-
-    var currentUserId = "";
-    var currentReportData = "";
+define(["jquery", "util", "echarts", "model", "jqueryUi", "jquery.table2excel.min"], function ($, util) {
     var $navLi = $("nav").find("ul").find("li");
     var $rightLi = $("#index").find("li");
     var $divRoot = $("body").children("div");
@@ -188,229 +183,146 @@ define(["jquery","util", "echarts", "jqueryUi"], function ($,util, echarts) {
     //控制按钮样式变化的函数
 
     //获取modelName modelInfo
-
-    //报告折线图
-    //报告表格
-    //详细报告年份月份表格
-    //详细报告选股表格
     //执行的函数
     return {
+        //我的模
+        //
+        //
+        //禁止回退或者前进
+        forbidBack: function () {
+            if (window.history && window.history.pushState) {
+                $(window).on('popstate', function () {
+                    window.history.pushState('forward', null, '#');
+                    window.history.forward(1);
+                });
+            }
+            window.history.pushState('forward', null, '#'); //在IE中必须得有这两行
+            window.history.forward(1);
+        },
+        //注销
+        logout: function () {
+            $("#user-information").find("button").click(function () {
+                $.get({
+                    url: "/user/logout"
+                })
+            })
+        },
+        //接受用户名
+        receiveUserName: function () {
+            var username = sessionStorage.getItem("username");
+            $("#user-information").find("span").text(username);
+        },
         //    重置
         resetPage: function () {
-            $navLi.eq(5).click(function () {
-                //重置变量
-                currentModelId = "";
-                currentReportData = "";
-                currentModelInfo = "";
-                currentModelName = "";
+            $navLi.eq(4).click(function () {
+                // if (util.currentModelId === "") {
                 $("#left").find("input[type='reset']").click();
                 $("#left").find("ul").find("img").click();
-
-                //重置之后保存不能点
-
-                util.buttonCss($navLi.eq(1), "lightsteelblue", "none");
-                util.buttonCss($navLi.eq(2), "lightsteelblue", "none");
-                util.buttonCss($navLi.eq(4), "lightsteelblue", "none");
+                //重置之后之前的按钮不能点
+                $(this).prevAll().each(function () {
+                    util.buttonCss($(this), "lightsteelblue", "none");
+                });
                 //回到初始状态  首先是div的变化
-                $("#report").hide();
-                $("#report").find("*").hide();
-                $("#detail-report").hide();
-                $("#detail-report").find("*").hide();
-                $("#choose-stock").find("*").hide();
-                $("#edit-model").hide();
-                $("#edit-model").find("*").hide();
+                $divRoot.children("div").not($("#model")).each(function () {
+                    $(this).hide();
+                    $(this).find("*").hide();
+                });
                 $("#model").show();
+                $("#model").find("*").show();
                 $("#left").children("div").first().hide();
                 $("#left").children("div").first().find("*").hide();
-                $("#left").find("*").not("input[type='reset']").show();
-                $("#right").find("*").filter("li span:first-child").show();
-                $("#model").find("div#left").show();
-                $("#model").find("div#right").show();
-            })
-        },
-        report: function () {
-
-            $navLi.eq(1).click(function () {
-                    $divRoot.children("div#model").hide();
-                    $divRoot.children("div#detail-report").hide();
-                    $divRoot.children("div#detail-report").find("*").hide();
-                    $divRoot.children("div#report").show();
-                    $divRoot.children("div#model").find("*").hide();
-                    $divRoot.children("div#report").find("*").show();
-
-                }
-            )
-        },
-//详细报告
-        detailReport: function () {
-            $navLi.eq(2).click(function () {
-                $divRoot.children("div#model").hide();
-                $divRoot.children("div#report").hide();
-                $divRoot.children("div#model").find("*").hide();
-                $divRoot.children("div#report").find("*").hide();
-                $divRoot.children("div#detail-report").show();
-                $divRoot.children("div#detail-report").find("*").show();
-            })
-        },
-        //    保存模型
-        saveModel: function () {
-            $navLi.eq(4).on("click", function () {
-                var $li = $("#left").find("ul").find("li");
-                var liLen = $("#left").find("ul").find("li").length;
-                if (liLen !== 0) {
-                    //获得模型名称和模型信息
-                    var model = util.getModelName_Info($li);
-                    $.post({
-                        url: "/stock/savemodel",
-                        data: {
-                            modelId: currentModelId,
-                            modelName: model.modelName,
-                            modelInfo: model.modelInfo,
-                            reportData: currentReportData
-                        },
-                        success: function (data) {
-                            if (data["status"] === "SUCCESS") {
-                                //把id为modelId的加入
-                                // $("#edit-model").find("select").append("<option value=" + currentModelId + "></option>")
-                                alert(data["message"]);
-                            }
-                        }
-                    })
-                } else {
-                    alert("没有选择指标，无法保存");
-                }
+                $("#left").find("input[type='reset']").hide();
+                $("#right").find("li").each(function () {
+                    $(this).find("*").hide();
+                    $(this).find("span").first().show();
+                });
+                $("#left").find("p").remove();
+                // } else {
+                //     $navLi.eq(6).click();
+                // }
             })
         },
         //    编辑
         edit: function () {
             $navLi.eq(0).on("click", function () {
+
+                $divRoot.children("div").not($("#model")).each(function () {
+                    $(this).hide();
+                    $(this).find("*").hide();
+                });
+                $("#model").show();
+                $("#model").find("*").show();
+                //不该显示的隐藏掉
+                $("#right").find("li").each(function () {
+                    $(this).find("*").hide();
+                    $(this).find("span").first().show();
+                });
+                $("input[type='reset']").hide();
                 //编辑的时候也不能点
+                util.buttonCss($navLi.eq(0), "lightsteelblue", "none");
+                util.buttonCss($navLi.eq(1), "yellow", "auto");
+                util.buttonCss($navLi.eq(2), "yellow", "auto");
+                util.buttonCss($navLi.eq(3), "yellow", "auto");
+                util.buttonCss($navLi.eq(4), "yellow", "auto");
+            })
+        },
+
+
+        //    选择指标之后  若是修改指标  详细报告  选股以及保存都不能点击
+        indexChange: function () {
+            $("#left").on("change", "input[type='text']", function () {
                 util.buttonCss($navLi.eq(1), "lightsteelblue", "none");
                 util.buttonCss($navLi.eq(2), "lightsteelblue", "none");
-                util.buttonCss($navLi.eq(4), "lightsteelblue", "none");
-                $("#report").hide();
-                $("#report").find("*").hide();
-                $("#detail-report").hide();
-                $("#detail-report").find("*").hide();
-                $("#choose-stock").find("*").hide();
-                $("#edit-model").hide();
-                $("#edit-model").find("*").hide();
-                $("#model").show();
-                $("#left").children("div").first().hide();
-                $("#left").children("div").first().find("*").hide();
-                $("#left").find("*").not("input[type='reset']").show();
-                $("#right").find("*").not("li span:last-child").show();
-                $("#model").find("div#left").show();
-                $("#model").find("div#right").show();
-            })
-        },
-        //    创建新模型
-        newModel: function () {
-            $navLi.eq(6).on("click", function () {
+                util.buttonCss($navLi.eq(3), "lightsteelblue", "none");
+            });
+            //A0008 A0009都带有校验
+            $("#left").on("change", "select", function () {
+                $("#left").children("div").eq(1).find("p").remove();
                 var $this = $(this);
-                $this.prevAll().show();
-                $this.prevAll().css({
-                    "display": "inline-block"
-                })
-                $this.hide();
-                $this.nextAll().hide();
-                $navLi.eq(5).click();
+                var preVal = $this.parent().children("input[type='text']").eq(0).val();
+                var lastVal = $this.parent().children("input[type='text']").eq(1).val();
+                var preUnitVal = $this.parent().children("select").eq(0).val();
+                var lastUnitVal = $this.parent().children("select").eq(1).val();
+                if (preVal !== 0 && lastVal !== 0) {
+                    if (preVal * preUnitVal >= lastVal * lastUnitVal) {
+                        $this.parent().children("select").eq(0).val(1000000);
+                        $this.parent().children("select").eq(1).val(100000000);
+                        var warnInfo = "市值M1必须小于M2!";
+                        util.warn($this, warnInfo);
+                    }
+                }
+                util.buttonCss($navLi.eq(1), "lightsteelblue", "none");
+                util.buttonCss($navLi.eq(2), "lightsteelblue", "none");
+                util.buttonCss($navLi.eq(3), "lightsteelblue", "none");
+            })
+            //只要改变模型名称，模型id就会清空；不改变模型名称只改变模型信息  就更新模型
+            $("#left").children("div").eq(2).find("input[type='text']").eq(3).change(function () {
+                util.currentModelId = "";
+            });
+            $("#my-detail-report").on("change", "input[type='text']", function () {
+                util.currentModelId = "";
             })
         },
-//        首页详细报告
 
 
-        //    编辑模型
-        editModel: function () {
-            $navLi.eq(7).on("click", function () {
-                //先模拟创建新模型
-                $navLi.eq(6).click();
-                //    选择model  获取modelId
-                var modelId = $("#edit-model").find("select").val();
-                currentModelId = modelId;
-                var index = $("#index");
-                var $left = $("#left").find("form");
-                $.post({
-                    url: "/stock/modeldetail",
-                    data: {
-                        modelId: modelId
-                    },
-                    success: function (data) {
-                        var model = data["model"];
-                        var modelInfo = model["modelinfo"];
-                        var modelName = model["modelname"];
-                        //解析modelInfo
-                        //    先分割
-                        var modelInfoSplit = modelInfo.split("&");
-                        //首先填写最后四个空
-                        var controlStr = modelInfoSplit[modelInfoSplit.length - 1];
-                        var control = controlStr.substring(controlStr.indexOf("-") + 1);
-                        //持有期
-                        var controlVals = control.split("_");
-                        $left.find("input[type='text']").eq(0).val(controlVals[0]);
-                        //止损
-                        $left.find("input[type='text']").eq(1).val(controlVals[1]);
-                        //止盈
-                        $left.find("input[type='text']").eq(2).val(controlVals[2]);
-                        //modelName
-                        $left.find("input[type='text']").eq(3).val(modelName);
-                        //回测时间
-                        $left.find("input[value='" + controlVals[3] + "']").prop("checked", true);
-                        //填写指标
-                        for (var i = 0; i < modelInfoSplit.length; i++) {
-                            //
-                            var pos = modelInfoSplit[i].indexOf("-");
-                            var className = modelInfoSplit[i].substring(0, pos);
-                            //左栏中出现指标，但是值都为空
-                            index.find("li." + className).click();
-                            //    填充值，分为不同的情况
-                            //    只有一个值
-                            if (className === "A0007") {
-                                //获取填充的值
-                                var val = modelInfoSplit[i].substring(pos);
-                                $("#left").find("ul").find("li." + className).find("input[value='" + val + "']").prop("checked", true);
-                            } else if (className === "A0008" || className === "A0009") {
-                                var vals = modelInfoSplit[i].substring(modelInfoSplit[i].indexOf("-") + 1).split("_");
-                                var $input = $("#left").find("ul").find("li." + className).find("input[type='text']");
-                                var $select = $("#left").find("ul").find("li." + className).find("select");
-                                for (var m = 0; m < vals.length; m++) {
-                                    $input.eq(m).val((vals[m] / $select.eq(m).val()).toFixed(2));
-                                }
-                            } else {
-                                var vals = modelInfoSplit[i].substring(modelInfoSplit[i].indexOf("-") + 1).split("_");
-                                var $input = $("#left").find("ul").find("li." + className).find("input[type='text']");
-                                for (var j = 0; j < vals.length; j++) {
-                                    $input.eq(j).val(vals[j]);
-                                }
-                            }
-                        }
-
-                    }
-                })
+        //    回退
+        goBack: function () {
+            $("#back").click(function () {
+                $("body").find("*").end();
             })
         },
-        //    删除模型
-        deleteModel: function () {
-            $navLi.last().on("click", function () {
-                var $select = $("#edit-model").find("select");
-                var modelId = $("#edit-model").find("select").val();
-
-                $.post({
-                    url: "/deletemodel",
-                    data: {
-                        modelId: modelId
-                    },
-                    success: function (data) {
-                        if (data["status"] === "SUCCESS") {
-
-                            $select.find("option[value='" + modelId + "']").remove();
-                        }
-                        alert(data["message"]);
-                    }
-
-                })
+        //    换肤
+        replaceSkin: function () {
+            $("header").find("select").change(function () {
+                var $this = $(this);
+                if ($this.val() === "light") {
+                    $("link").attr("href","/styles/main/light.css");
+                }else if($this.val() === "black"){
+                    $("link").attr("href","/styles/main/modelstyle.css");
+                }else if($this.val() === "universe"){
+                    $("link").attr("href","/styles/main/universe.css");
+                }
             })
-
         }
 
     };

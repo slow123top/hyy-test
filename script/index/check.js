@@ -15,7 +15,7 @@ define(["jquery"], function ($) {
                 var $this = $(this);
                 //每次获得焦点时都要更新提示信息
                 $this.parent().find("p").remove();
-                $this.parent().append("<p>用户名仅支持汉字或者字母，字符长度为6-12</p>");
+                $this.parent().append("<p>用户名支持汉字、字母和数字，字符长度为6-12</p>");
                 $this.parent().find("p").css({
                     "color": "#FFFFFF"
                 })
@@ -27,8 +27,8 @@ define(["jquery"], function ($) {
                 //输入框为空时表示没有输入，不判断；当输入后再进行判断是否有问题产生
                 if (registerUsernameVal !== "") {
                     //首先判断是否符合字符格式  仅支持汉字或者字母
-                    if (registerUsernameVal.replace(/^[\u4e00-\u9fa5a-zA-Z]+$/, "").length !== 0) {
-                        $this.parent().append("<p>输入格式不正确!仅支持输入汉字或者字母</p>")
+                    if (registerUsernameVal.replace(/^[\u4e00-\u9fa5a-zA-Z0-9]+$/, "").length !== 0) {
+                        $this.parent().append("<p>输入格式不正确!仅支持输入汉字、字母或者数字</p>")
                     } else if (registerUsernameVal.length < 6 || registerUsernameVal.length > 12) {
                         $this.parent().append("<p>用户名长度不符合要求</p>")
                     } else {
@@ -79,7 +79,7 @@ define(["jquery"], function ($) {
                 var $this = $(this);
                 //每次获得焦点时都要更新提示信息
                 $this.parent().find("p").remove();
-                $this.parent().append("<p>用户名仅支持汉字或者字母，字符长度为6-12</p>");
+                $this.parent().append("<p>用户名支持汉字、字母和数字，字符长度为6-12</p>");
                 $this.parent().find("p").css({
                     "color": "#FFFFFF"
                 })
@@ -91,8 +91,8 @@ define(["jquery"], function ($) {
                 //输入框为空时表示没有输入，不判断；当输入后再进行判断是否有问题产生
                 if (registerUsernameVal !== "") {
                     //首先判断是否符合字符格式  仅支持汉字或者字母
-                    if (registerUsernameVal.replace(/^[\u4e00-\u9fa5a-zA-Z]+$/, "").length !== 0) {
-                        $this.parent().append("<p>输入格式不正确!仅支持输入汉字或者字母</p>")
+                    if (registerUsernameVal.replace(/^[\u4e00-\u9fa5a-zA-Z0-9]+$/, "").length !== 0) {
+                        $this.parent().append("<p>输入格式不正确!仅支持输入汉字、字母或者数字</p>")
                     } else if (registerUsernameVal.length < 6 || registerUsernameVal.length > 12) {
                         $this.parent().append("<p>用户名长度不符合要求</p>")
                     } else {
